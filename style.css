@@ -5,9 +5,10 @@
 
 /* --- BODY FADE IN --- */
 body {
+  overflow-x: hidden;
   overflow-y: auto; 
   margin: 0;
-  padding: 20px 0;
+  padding: 20px 0 90px; /* Generous bottom padding so phone menu bars don't cover the gallery */
   background-color: #FF85A1; /* Fallback color while image loads */
   
   /* --- REPEATING BACKGROUND IMAGE --- */
@@ -16,6 +17,7 @@ body {
   background-size: auto;                  /* Keeps original image tile size */
   
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height to prevent phone browser bar clipping */
   
   /* Adds page load fade-in */
   animation: pageFadeIn 1.2s ease-out forwards;
@@ -70,6 +72,8 @@ p {
   padding: 40px 30px;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  height: auto !important;
+  overflow: visible !important;
 }
 
 /* --- CAKE & FADE TRANSITION --- */
@@ -158,6 +162,15 @@ p {
   transform: scale(0.95);
 }
 
+/* Disabled state - prevents extra interactions and stops scale animation */
+#blow-btn:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
 /* --- HIDDEN CONTENT BEFORE BUTTON PRESS --- */
 .hidden-content {
   opacity: 0;
@@ -171,7 +184,8 @@ p {
 .hidden-content.reveal {
   opacity: 1;
   visibility: visible;
-  max-height: 5000px; /* Allows smooth height expansion */
+  max-height: none !important; /* Allows full expansion on long mobile pages */
+  overflow: visible !important;
   pointer-events: auto;
   animation: contentFadeIn 0.8s ease-out forwards;
 }
@@ -199,6 +213,7 @@ p {
   /* Forces video content to fill its box/fullscreen space */
   object-fit: cover; 
 }
+
 /* 1. Target the video when in HTML5 native fullscreen */
 video:fullscreen {
   object-fit: cover !important;
@@ -228,6 +243,7 @@ video:-moz-full-screen {
 ::-webkit-media-controls-enclosure {
   max-width: none !important;
 }
+
 /* --- FLIP GALLERY & HOVER BORDER --- */
 .image-gallery {
   display: flex;
