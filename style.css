@@ -1,0 +1,234 @@
+/* --- GLOBAL STYLES --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-y: auto; 
+  margin: 0;
+  padding: 20px 0;
+  background-color: #FF85A1;
+  min-height: 100vh;
+}
+
+/* --- TYPOGRAPHY --- */
+h1 {
+  text-align: center;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 3.0rem;
+  margin-top: 10px;
+  color: #4A2E35;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Caveat', cursive, sans-serif;
+  color: #4A2E35;
+}
+
+p {
+  text-align: center;
+  font-family: 'Caveat', cursive, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #222;
+}
+
+#note {
+  padding: 2vh;
+}
+
+/* --- LETTER CONTAINER --- */
+#letter {
+  background-color: #FFF5F6;
+  width: 70%;
+  max-width: 800px;
+  min-width: 320px;
+  margin: 20px auto;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* --- CAKE & FADE TRANSITION --- */
+.cake-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.cake-wrapper {
+  position: relative;
+  width: 280px;
+  max-width: 90%;
+  height: 280px;
+  margin: 0 auto;
+}
+
+.cake-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.cake-img.lit {
+  opacity: 1;
+  z-index: 2;
+}
+
+.cake-img.blown {
+  opacity: 0;
+  z-index: 1;
+}
+
+.cake-wrapper.candles-blown .cake-img.lit {
+  opacity: 0;
+}
+
+.cake-wrapper.candles-blown .cake-img.blown {
+  opacity: 1;
+}
+
+/* Blow Button Styling */
+#blow-btn {
+  background-color: #FF85A1;
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 28px;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 133, 161, 0.4);
+  transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+}
+
+#blow-btn:hover {
+  background-color: #FF477E;
+  transform: scale(1.05);
+}
+
+#blow-btn:active {
+  transform: scale(0.95);
+}
+
+/* --- MAIN VIDEO --- */
+.centered-video {
+  display: block;
+  margin: 25px auto;
+  max-width: 100%;
+  width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- FLIP GALLERY & HOVER BORDER --- */
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin: 30px auto 10px;
+}
+
+.flip-card {
+  width: 30%;
+  min-width: 180px;
+  height: 220px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Zoom effect on hover */
+.flip-card:hover {
+  transform: scale(1.05);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 6px 12px rgba(74, 46, 53, 0.15);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Highlight border and soft glow on hover */
+.flip-card:hover .flip-card-front,
+.flip-card:hover .flip-card-back {
+  border-color: #FF477E;
+  box-shadow: 0 10px 20px rgba(255, 71, 126, 0.35);
+}
+
+/* Media handling */
+.flip-card-front img,
+.flip-card-front video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Back Side Styling */
+.flip-card-back {
+  background-color: #FFD1DC;
+  color: #4A2E35;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.flip-card-back p {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  margin: 0;
+  line-height: 1.3;
+}
+.flip-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 133, 161, 0.9);
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.flip-btn:hover {
+  background: #FF477E;
+}
