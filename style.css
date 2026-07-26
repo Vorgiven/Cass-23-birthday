@@ -3,12 +3,34 @@
   box-sizing: border-box;
 }
 
+/* --- BODY FADE IN --- */
 body {
   overflow-y: auto; 
   margin: 0;
   padding: 20px 0;
-  background-color: #FF85A1;
+  background-color: #FF85A1; /* Fallback color while image loads */
+  
+  /* --- REPEATING BACKGROUND IMAGE --- */
+  background-image: url('images/bg.jpg'); /* Change extension (.jpg / .png / .svg) if needed */
+  background-repeat: repeat;             /* Tile the image horizontally & vertically */
+  background-size: auto;                  /* Keeps original image tile size */
+  
   min-height: 100vh;
+  
+  /* Adds page load fade-in */
+  animation: pageFadeIn 1.2s ease-out forwards;
+}
+
+/* Definition for the fade animation */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px); /* Subtle slide-up effect as it fades in */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* --- TYPOGRAPHY --- */
@@ -95,6 +117,23 @@ p {
   opacity: 1;
 }
 
+/* Bopping animation when candles are blown */
+.cake-wrapper.candles-blown {
+  animation: gentleBopRotate 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes gentleBopRotate {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-3deg) scale(1.02); /* Slight lift & left tilt */
+  }
+  100% {
+    transform: translateY(-4px) rotate(3deg) scale(1.01);  /* Right tilt */
+  }
+}
+
 /* Blow Button Styling */
 #blow-btn {
   background-color: #FF85A1;
@@ -117,6 +156,35 @@ p {
 
 #blow-btn:active {
   transform: scale(0.95);
+}
+
+/* --- HIDDEN CONTENT BEFORE BUTTON PRESS --- */
+.hidden-content {
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out, max-height 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.hidden-content.reveal {
+  opacity: 1;
+  visibility: visible;
+  max-height: 5000px; /* Allows smooth height expansion */
+  pointer-events: auto;
+  animation: contentFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* --- MAIN VIDEO --- */
@@ -214,6 +282,7 @@ p {
   margin: 0;
   line-height: 1.3;
 }
+
 .flip-btn {
   position: absolute;
   top: 8px;
@@ -231,4 +300,41 @@ p {
 
 .flip-btn:hover {
   background: #FF477E;
+}
+
+/* --- FLOATING MUSIC BUTTON --- */
+.music-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 3px solid #FF85A1;
+  box-shadow: 0 4px 15px rgba(255, 133, 161, 0.4);
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.1);
+  background-color: #FFF5F6;
+  border-color: #FF477E;
+}
+
+/* Gentle pulsing glowing ring when music is playing */
+.music-btn.playing {
+  animation: musicPulse 2s infinite;
+}
+
+@keyframes musicPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 133, 161, 0.7); }
+  70% { box-shadow: 0 0 0 14px rgba(255, 133, 161, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 133, 161, 0); }
 }
