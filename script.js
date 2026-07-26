@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const musicIcon = document.getElementById('music-icon');
     let isMusicPlaying = false;
   
-    if (bgMusic) bgMusic.volume = 0.2;
+    if (bgMusic) bgMusic.volume = 0.05;
     if (blowSfx) blowSfx.volume = 0.5; 
 
 
