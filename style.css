@@ -195,8 +195,39 @@ p {
   width: 600px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  /* Forces video content to fill its box/fullscreen space */
+  object-fit: cover; 
+}
+/* 1. Target the video when in HTML5 native fullscreen */
+video:fullscreen {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
 }
 
+/* 2. Webkit browsers (Chrome, Safari, Edge, iOS) */
+video:-webkit-full-screen {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* 3. Firefox */
+video:-moz-full-screen {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 4. Force browser internal video container to stretch */
+::-webkit-media-controls-enclosure {
+  max-width: none !important;
+}
 /* --- FLIP GALLERY & HOVER BORDER --- */
 .image-gallery {
   display: flex;
